@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchCoinInfo, fetchCoinTickers } from '../api';
+import { TiHome } from 'react-icons/ti';
+import { Helmet } from 'react-helmet-async';
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -17,8 +19,20 @@ const Container = styled.div`
 const Header = styled.header`
   height: 15vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  svg {
+    font-size: 40px;
+  }
+  a {
+    color: ${(props) => props.theme.boxColor};
+  }
+`;
+
+const Img = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 `;
 
 const Title = styled.h1`
@@ -29,7 +43,7 @@ const Title = styled.h1`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.boxColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -44,8 +58,10 @@ const OverviewItem = styled.div`
     margin-bottom: 5px;
   }
 `;
+
 const Description = styled.p`
   margin: 20px 0px;
+  color: ${(props) => props.theme.boxColor};
 `;
 
 const Loader = styled.span`
@@ -65,7 +81,7 @@ const Tab = styled.span<{ $isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.boxColor};
   padding: 7px 0px;
   border-radius: 10px;
   a {
@@ -153,10 +169,22 @@ export default function Coin() {
 
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
+        <Img
+          alt={`${coinId}`}
+          src={`https://cryptocurrencyliveprices.com/img/${coinId}.png`}
+        />
         <Title>
           {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
+        <Link to={'/'}>
+          <TiHome />
+        </Link>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -192,10 +220,15 @@ export default function Coin() {
               <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
             <Tab $isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link
+                to={`/${coinId}/price`}
+                state={{ priceHistory: tickerData?.quotes.USD }}
+              >
+                Price
+              </Link>
             </Tab>
           </Tabs>
-          <Outlet />
+          <Outlet context={{ coinId }} />
         </>
       )}
     </Container>

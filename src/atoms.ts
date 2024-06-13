@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const coin = atom({
-  key: '',
-  default: [],
+export const isDarkAtom = atom({
+  key: 'isDark',
+  default: true,
 });
