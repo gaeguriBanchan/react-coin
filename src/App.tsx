@@ -61,6 +61,8 @@ body{
   font-style: normal;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
+  max-width: 700px;
+  margin: 0 auto;
 } 
 a{
   text-decoration: none;
