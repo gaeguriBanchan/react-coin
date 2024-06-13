@@ -182,7 +182,7 @@ export default function Coin() {
         <Title>
           {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
-        <Link to={'/'}>
+        <Link to={`${process.env.PUBLIC_URL}/`}>
           <TiHome />
         </Link>
       </Header>
