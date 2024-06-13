@@ -56,5 +56,5 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.34"
   },
-  "homepage": "https://gaeguriBanchan.github.io/react-coin"
+  "homepage": "https://gaeguriBanchan.github.io/react-coin/"
 }

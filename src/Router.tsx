@@ -7,10 +7,10 @@ import Price from './routes/Price';
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path={`${process.env.PUBLIC_URL}/`} element={<Coins />} />
-        <Route path={`${process.env.PUBLIC_URL}/:coinId`} element={<Coin />}>
+        <Route path="/" element={<Coins />} />
+        <Route path="/:coinId" element={<Coin />}>
           <Route path="chart" element={<Chart />} />
           <Route path="price" element={<Price />} />
         </Route>
