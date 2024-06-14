@@ -22,6 +22,7 @@ const Header = styled.header`
     color: ${(props) => props.theme.boxColor};
     font-size: 40px;
     margin-left: 20px;
+    cursor: pointer;
   }
 `;
 

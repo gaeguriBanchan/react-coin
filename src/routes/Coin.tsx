@@ -11,6 +11,10 @@ import styled from 'styled-components';
 import { fetchCoinInfo, fetchCoinTickers } from '../api';
 import { TiHome } from 'react-icons/ti';
 import { Helmet } from 'react-helmet-async';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isDarkAtom } from '../atoms';
+import { MdOutlineWbSunny } from 'react-icons/md';
+import { FaRegMoon } from 'react-icons/fa';
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -22,7 +26,10 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   svg {
+    color: ${(props) => props.theme.boxColor};
     font-size: 40px;
+    margin-left: 20px;
+    cursor: pointer;
   }
   a {
     color: ${(props) => props.theme.boxColor};
@@ -168,6 +175,10 @@ export default function Coin() {
 
   const loading = infoLoading || tickerLoading;
 
+  const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
+
   return (
     <Container>
       <Helmet>
@@ -183,6 +194,11 @@ export default function Coin() {
         <Title>
           {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
+        {isDark ? (
+          <MdOutlineWbSunny onClick={toggleDarkAtom} />
+        ) : (
+          <FaRegMoon onClick={toggleDarkAtom} />
+        )}
         <Link to={'/'}>
           <TiHome />
         </Link>
