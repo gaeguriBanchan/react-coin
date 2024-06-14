@@ -67,6 +67,7 @@ const Description = styled.p`
 const Loader = styled.span`
   text-align: center;
   display: block;
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Tabs = styled.div`
