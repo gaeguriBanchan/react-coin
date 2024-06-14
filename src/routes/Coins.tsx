@@ -55,6 +55,7 @@ const Title = styled.h1`
 const Loader = styled.span`
   text-align: center;
   display: block;
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Img = styled.img`
